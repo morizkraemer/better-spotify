@@ -25,16 +25,12 @@ export default function Playlist({ playlist }) {
         });
       }}
     >
-      {playlist.images && playlist.images.length > 0 ? (
-        <img
-          src={playlist.images[0].url}
-          alt=""
-          width="32"
-          className="mx-2 my-1 max-h-[32px]"
-        />
-      ) : (
-        <div className="border m-1">img..</div>
-      )}
+      <img
+        src={playlist?.images[0].url}
+        alt="Playlist Image"
+        width="32"
+        className="mx-2 my-1 max-h-[32px]"
+      />
       <div className="truncate">{playlist.name}</div>
     </div>
   );

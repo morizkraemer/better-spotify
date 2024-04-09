@@ -1,8 +1,31 @@
-import { createContext, useState } from "react";
+//WIP
 
+import { createContext, useState } from "react";
 const ContextMenuContext = createContext();
 
 import React from "react";
+
+function ContextMenu() {
+  const { isVisible, position, content, hideMenu } =
+    useContext(ContextMenuContext);
+
+  if (!isVisible) return null;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: position.y,
+        left: position.x,
+        zIndex: 1000,
+        // Add more styles as needed
+      }}
+      onMouseLeave={hideMenu}
+    >
+      {content}
+    </div>
+  );
+}
 
 export default function ContextMenuProvider({ children }) {
   const [isVisible, setIsVisible] = useState();

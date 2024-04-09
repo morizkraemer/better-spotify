@@ -8,13 +8,18 @@ export default function PlaylistContent({ playlistId }) {
 
   const fetchPlaylistTracks = async () => {
     const playlistResponse = await spotifyApi.getPlaylist(playlistId);
+
+    //this is the solution for the rate limit on the api
+    //
     // const anaylsisResponse = await spotifyApi.getAudioFeaturesForTracks(
     //   playlistResponse.body.tracks.items.map((t) => t.id),
     // );
     // console.log(anaylsisResponse);
+
     const { body } = playlistResponse;
     setPlaylist(body);
   };
+
   useEffect(() => {
     fetchPlaylistTracks();
   }, [playlistId]);

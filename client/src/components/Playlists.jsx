@@ -46,7 +46,7 @@ export default function Playlists() {
   }, [spotifyApi]);
 
   return (
-    <div className="w-1/5 h-full flex flex-col max-w-full h-full gap-2 ">
+    <div className="w-1/5 flex flex-col max-w-full h-full gap-2 ">
       <input
         type="text"
         className="bg-black border h-8 p-2 "

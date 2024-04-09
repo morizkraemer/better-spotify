@@ -5,7 +5,7 @@ export default function Header() {
   const { spotifyApi } = useSpotifyApi();
   const [userObject, setUserObject] = useState("");
   const spotifyAccessToken = spotifyApi.getAccessToken();
-  const beatportAccessToken = false;
+  const beatportAccessToken = false; //for now, no beatport integration
 
   useEffect(() => {
     const fetchUserData = async () => {

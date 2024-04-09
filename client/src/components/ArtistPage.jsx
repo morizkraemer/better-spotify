@@ -4,15 +4,16 @@ import { useSpotifyApi } from "../context/SpotifyApiContext";
 export default function ArtistPage({ artistId }) {
   const [artist, setArtist] = useState(null);
   const { spotifyApi } = useSpotifyApi();
+
   async function fetchArtistData() {
     const response = await spotifyApi.getArtist(artistId);
     setArtist(response.body);
-    console.log(response.body);
   }
 
   useEffect(() => {
     fetchArtistData();
   }, [artistId]);
+
   return (
     <div className="flex justify-end">
       <div className="flex items-center gap-5 border-2 w-fit pr-5 mx-10">
@@ -35,7 +36,7 @@ export default function ArtistPage({ artistId }) {
                 );
               })
             ) : (
-              <span className="text-neutral-500">No Genres</span>
+              <span className="text-neutral-700">No Genres</span>
             )}
           </span>
         </div>

@@ -25,7 +25,6 @@ export function useAuth(code) {
           setExpiresIn(response.data.expires_in);
         }
       } catch (err) {
-        console.log(err);
         window.location = "/";
       }
     };
