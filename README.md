@@ -2,7 +2,7 @@
 
 ### Quickstart
 
-you need to be added to my the app on my Spotify dev account, without that im pretty sure you cant do anything..
+you need to be added to the app on my Spotify dev account, without that im pretty sure you cant do anything..
 
 if you have gotten the env files from me, you can place them in the client and server root folders!
 
