@@ -1,8 +1,17 @@
-# React + Vite
+## App with better tools to use spotify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Quickstart
 
-Currently, two official plugins are available:
+you need to be added to my the app on my Spotify dev account, without that im pretty sure you cant do anything..
+but, if you are, this is how you start the app:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+$cd server
+$npm i
+$npm run dev
+$cd ../client
+$npm i
+$npm run dev
+```
+
+there is my spotfiy client ID and secret in the env files, so dont share it ;)
