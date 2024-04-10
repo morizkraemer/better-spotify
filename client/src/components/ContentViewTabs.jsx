@@ -1,8 +1,8 @@
 import React from "react";
-import { useTabs } from "../context/TabContext";
+import useTabsStore from "../stores/tabStore";
 
 export default function ContentViewTabs({ tab }) {
-  const { activeTab, setActiveTab, onCloseTab } = useTabs();
+  const { activeTab, setActiveTab, onCloseTab } = useTabsStore();
   return (
     <div
       className={`flex items-center border my-2 mx-1 px-2 py-1 ${tab.id === activeTab?.id ? "border-neutral-300" : "border-neutral-500"}`}

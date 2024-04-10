@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSpotifyApi } from "../context/SpotifyApiContext";
 import SpotifyWebPlayer from "react-spotify-web-playback";
-import { usePlayer } from "../context/PlayerContext";
+import { usePlayerStore } from "../stores/playerStore";
 
 export default function Player() {
-  const { playingTrack } = usePlayer();
   const [playing, setPlaying] = useState(false);
   const { accessToken } = useSpotifyApi();
+
+  const playingTrack = usePlayerStore((state) => state.playingTrack);
 
   useEffect(() => setPlaying(true), [playingTrack]);
 

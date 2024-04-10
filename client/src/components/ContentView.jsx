@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import Tab from "./ContentViewTabs";
 import PlaylistContent from "./PlaylistContent";
 import ArtistPage from "./ArtistPage";
-import { useTabs } from "../context/TabContext";
+import useTabsStore from "../stores/tabStore";
 
 export default function ContentView() {
-  const { tabs, activeTab } = useTabs();
+  const { tabs, activeTab } = useTabsStore();
 
   const component = useMemo(() => {
     switch (activeTab?.type) {
@@ -22,7 +22,7 @@ export default function ContentView() {
           </div>
         );
     }
-  }, [activeTab]);
+  }, [activeTab, tabs]);
 
   return (
     <div className="w-5/6 h-full flex flex-col">

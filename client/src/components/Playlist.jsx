@@ -1,8 +1,8 @@
 import React from "react";
-import { useTabs } from "../context/TabContext";
+import useTabsStore from "../stores/tabStore";
 
 export default function Playlist({ playlist }) {
-  const { onOpenTab, activeTab, tabs } = useTabs();
+  const { onOpenTab, activeTab, tabs } = useTabsStore();
 
   const border = () => {
     if (activeTab?.playlistId === playlist?.id) return "border-gray-300";

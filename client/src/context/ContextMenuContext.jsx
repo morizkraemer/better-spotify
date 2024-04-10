@@ -18,7 +18,6 @@ function ContextMenu() {
         top: position.y,
         left: position.x,
         zIndex: 1000,
-        // Add more styles as needed
       }}
       onMouseLeave={hideMenu}
     >

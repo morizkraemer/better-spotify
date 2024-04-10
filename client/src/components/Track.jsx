@@ -1,23 +1,26 @@
 import { useEffect, useState, Fragment } from "react";
-import { usePlayer } from "../context/PlayerContext";
-import { useTabs } from "../context/TabContext";
 import { useSpotifyApi } from "../context/SpotifyApiContext";
 import { getCamelot, roundBpm } from "../helpers";
+import { usePlayerStore } from "../stores/playerStore";
+import useTabsStore from "../stores/tabStore";
+import useContextMenuStore from "../stores/contextMenuStore";
 
 export default function Track({ track, index }) {
-  const { setPlayingTrack, playingTrack } = usePlayer();
+  const setPlayingTrack = usePlayerStore((state) => state.setPlayingTrack);
+  const playingTrack = usePlayerStore((state) => state.playingTrack);
   const [audioFeatures, setAudioFeatures] = useState(null);
   const { spotifyApi } = useSpotifyApi();
-  const { onOpenTab } = useTabs();
+  const { onOpenTab } = useTabsStore();
+  const showContextMenu = useContextMenuStore((state) => state.showContextMenu);
 
   async function getAudioFeatures(trackId) {
     const response = await spotifyApi.getAudioFeaturesForTrack(trackId);
     setAudioFeatures(response.body);
   }
 
-  useEffect(() => {
-    getAudioFeatures(track.id);
-  }, []);
+  // useEffect(() => {
+  //   getAudioFeatures(track.id);
+  // }, []);
 
   const time = new Date(track.duration_ms);
   const duration = `${time.getMinutes()}:${time.getSeconds().toString().padStart(2, "0")}`;
@@ -29,6 +32,7 @@ export default function Track({ track, index }) {
       }}
       onContextMenu={(e) => {
         e.preventDefault();
+        showContextMenu(e.clientX, e.clientY, <div>hi</div>);
       }}
     >
       <td className="px-1 text-neutral-400">{index + 1}</td>

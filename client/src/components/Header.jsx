@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSpotifyApi } from "../context/SpotifyApiContext";
+import useContextMenuStore from "../stores/contextMenuStore";
 
 export default function Header() {
   const { spotifyApi } = useSpotifyApi();
