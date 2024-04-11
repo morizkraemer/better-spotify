@@ -8,15 +8,16 @@ export default function PlaylistContent({ playlistId }) {
 
   const fetchPlaylistTracks = async () => {
     const playlistResponse = await spotifyApi.getPlaylist(playlistId);
-
-    //this is the solution for the rate limit on the api
-    //
-    // const anaylsisResponse = await spotifyApi.getAudioFeaturesForTracks(
-    //   playlistResponse.body.tracks.items.map((t) => t.id),
-    // );
-    // console.log(anaylsisResponse);
+    const trackIds = playlistResponse.body.tracks.items.map((t) => t.track.id);
+    const analysisResponse =
+      await spotifyApi.getAudioFeaturesForTracks(trackIds);
 
     const { body } = playlistResponse;
+    const data = body.tracks.items.map((t, index) => ({
+      ...t,
+      analysis: analysisResponse.body.audio_features[index],
+    }));
+    body.tracks.items = data;
     setPlaylist(body);
   };
 
@@ -43,8 +44,13 @@ export default function PlaylistContent({ playlistId }) {
             </tr>
           </thead>
           <tbody className="">
-            {playlist.tracks.items.map(({ track }, index) => (
-              <Track track={track} key={track.id} index={index} />
+            {playlist.tracks.items.map(({ track, analysis }, index) => (
+              <Track
+                track={track}
+                analysis={analysis}
+                key={track.id}
+                index={index}
+              />
             ))}
           </tbody>
         </table>

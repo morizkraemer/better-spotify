@@ -5,22 +5,14 @@ import { usePlayerStore } from "../stores/playerStore";
 import useTabsStore from "../stores/tabStore";
 import useContextMenuStore from "../stores/contextMenuStore";
 
-export default function Track({ track, index }) {
+export default function Track({ track, analysis, index }) {
   const setPlayingTrack = usePlayerStore((state) => state.setPlayingTrack);
   const playingTrack = usePlayerStore((state) => state.playingTrack);
   const [audioFeatures, setAudioFeatures] = useState(null);
   const { spotifyApi } = useSpotifyApi();
   const { onOpenTab } = useTabsStore();
   const showContextMenu = useContextMenuStore((state) => state.showContextMenu);
-
-  async function getAudioFeatures(trackId) {
-    const response = await spotifyApi.getAudioFeaturesForTrack(trackId);
-    setAudioFeatures(response.body);
-  }
-
-  // useEffect(() => {
-  //   getAudioFeatures(track.id);
-  // }, []);
+  console.log(analysis);
 
   const time = new Date(track.duration_ms);
   const duration = `${time.getMinutes()}:${time.getSeconds().toString().padStart(2, "0")}`;
@@ -94,9 +86,9 @@ export default function Track({ track, index }) {
         </div>
       </td>
       <td className="text-neutral-400">{duration}</td>
-      <td className="text-neutral-400">{roundBpm(audioFeatures?.tempo)}</td>
+      <td className="text-neutral-400">{roundBpm(analysis?.tempo)}</td>
       <td className="text-neutral-400">
-        {getCamelot(audioFeatures?.key, audioFeatures?.mode)}
+        {getCamelot(analysis?.key, analysis?.mode)}
       </td>
     </tr>
   );
