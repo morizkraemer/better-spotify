@@ -1,0 +1,5 @@
+sidebar
+  - refactor scroll hook into custom hook
+  - use spotifys next and offset to lazy load playlists
+  - fix layout when playlist name is long     
+

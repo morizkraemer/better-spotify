@@ -36,9 +36,15 @@ export default function ContextMenu() {
         left: position.x,
         zIndex: 100,
       }}
-      className="bg-black border-2 h-32 w-32"
+      className="bg-black border w-64"
     >
-      {content}
+      {content.map((e) => {
+        return (
+          <div className="flex items-center p-2 text-xl h-12 border border-neutral-700 hover:border-neutral-300">
+            {e.name}
+          </div>
+        );
+      })}
     </div>
   );
 }

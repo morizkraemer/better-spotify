@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useSpotifyApi } from "../context/SpotifyApiContext";
-import Playlist from "./Playlist";
+import { useSpotifyApi } from "../../context/SpotifyApiContext";
+import SideBarPlaylistRender from "./SideBarPlaylistRender";
+import LoaderSpinner from "../reusedComponents/LoaderSpinner";
 
 export default function Playlists() {
   const { spotifyApi } = useSpotifyApi();
@@ -37,7 +38,8 @@ export default function Playlists() {
     containerRef.current.addEventListener("scroll", handleScroll);
 
     return () => {
-      containerRef.current.removeEventListener("scroll", handleScroll);
+      containerRef.current &&
+        containerRef.current.removeEventListener("scroll", handleScroll);
     };
   }, [containerRef.current, allPlaylistsLoaded, fetchUserPlaylists]);
 
@@ -46,7 +48,7 @@ export default function Playlists() {
   }, [spotifyApi]);
 
   return (
-    <div className="w-1/5 flex flex-col max-w-full h-full gap-2 ">
+    <div className="flex flex-col max-w-full h-full gap-2 overflow-x-hidden">
       <input
         type="text"
         className="bg-black border h-8 p-2 "
@@ -61,10 +63,10 @@ export default function Playlists() {
                 !search || p.name.toLowerCase().includes(search.toLowerCase()),
             )
             .map((playlist) => (
-              <Playlist key={playlist.id} playlist={playlist} />
+              <SideBarPlaylistRender key={playlist.id} playlist={playlist} />
             ))
         ) : (
-          <div>Loading Playlists...</div>
+          <LoaderSpinner />
         )}
       </div>
     </div>

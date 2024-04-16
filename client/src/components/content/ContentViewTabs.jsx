@@ -1,5 +1,5 @@
 import React from "react";
-import useTabsStore from "../stores/tabStore";
+import useTabsStore from "../../stores/tabStore";
 
 export default function ContentViewTabs({ tab }) {
   const { activeTab, setActiveTab, onCloseTab } = useTabsStore();
