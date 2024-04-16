@@ -7,10 +7,10 @@ export default function Playlists() {
   const { spotifyApi } = useSpotifyApi();
   const [playlists, setPlaylists] = useState([]);
   const [search, setSearch] = useState("");
-  const [offset, setOffset] = useState(0);
   const [allPlaylistsLoaded, setAllPlaylistsLoaded] = useState(false);
   const containerRef = useRef(null);
   const limit = 50;
+  let offset = 0;
 
   const fetchUserPlaylists = useCallback(async () => {
     try {
@@ -18,11 +18,12 @@ export default function Playlists() {
         limit,
         offset,
       });
-      if (fetchedPlaylists.body.length < limit) {
+      console.log(fetchedPlaylists);
+      if (fetchedPlaylists.body.items.length < offset + limit) {
         setAllPlaylistsLoaded(true);
       }
       setPlaylists((prev) => [...prev, ...fetchedPlaylists.body.items]);
-      setOffset((previous) => (previous += limit));
+      offset += limit;
     } catch (error) {
       console.error(error);
     }
