@@ -1,18 +1,25 @@
-import React from "react";
 import useTabsStore from "../../stores/tabStore";
 import PlaylistCollabButton from "../reusedComponents/PlaylistCollabButton";
 import PlaylistPublicButton from "../reusedComponents/PlaylistPublicButton";
 
-export default function Playlist({ playlist }) {
+type PlaylistType = {
+  id: string;
+  name: string;
+  images: { url: string }[];
+  collaborative: boolean;
+  public: boolean;
+};
+type PlaylistProps = { playlist: PlaylistType };
+export default function Playlist({ playlist }: PlaylistProps) {
   const { onOpenTab, activeTab, tabs } = useTabsStore();
 
   const border = () => {
-    if (activeTab?.playlistId === playlist?.id) return "border-gray-300";
+    if (activeTab?.location?.id === playlist?.id) return "border-gray-300";
     else return "border-gray-700";
   };
 
   const background = () => {
-    if (tabs.some((t) => t?.playlistId === playlist?.id))
+    if (tabs.some((t) => t?.location?.id === playlist?.id))
       return "bg-neutral-800";
   };
 
